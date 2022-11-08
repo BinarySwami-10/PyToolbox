@@ -1,0 +1,1 @@
+The python code below takes the data from "processed.json" within this folder and displays the sentiment within the compiler itself. 
